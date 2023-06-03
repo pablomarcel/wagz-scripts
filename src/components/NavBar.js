@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, Box, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingIcon from '@mui/icons-material/ShoppingCart';
 import EventIcon from '@mui/icons-material/Event';
+import BadgeIcon from '@mui/icons-material/Badge';
+import PortraitIcon from '@mui/icons-material/Portrait';
 
 const drawerWidth = 240;
 
@@ -16,14 +19,19 @@ const NavBar = () => {
 
     const drawerItems = [
         {
-            text: 'ShopForm',
+            text: 'Shop Form',
             icon: <ShoppingIcon />,
             route: '/shopform',
         },
         {
-            text: 'EventForm',
+            text: 'Event Form',
             icon: <EventIcon />,
             route: '/eventform',
+        },
+        {
+            text: 'Public Figure Form',
+            icon: <PortraitIcon />,
+            route: '/publicfigureform',
         }
     ];
 
