@@ -6,6 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingIcon from '@mui/icons-material/ShoppingCart';
 import EventIcon from '@mui/icons-material/Event';
 import BadgeIcon from '@mui/icons-material/Badge';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 import PortraitIcon from '@mui/icons-material/Portrait';
 
 const drawerWidth = 240;
@@ -32,6 +33,11 @@ const NavBar = () => {
             text: 'Public Figure Form',
             icon: <PortraitIcon />,
             route: '/publicfigureform',
+        },
+        {
+            text: 'Public Figure Post',
+            icon: <PostAddIcon />,
+            route: '/publicfigurepostform',
         }
     ];
 
