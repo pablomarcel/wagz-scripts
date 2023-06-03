@@ -4,6 +4,7 @@ import './App.css';
 import NavBar from './components/NavBar';
 import ShopForm from './Forms/ShopForm';
 import EventForm from './Forms/EventForm';
+import PublicFigureForm from './Forms/PublicFigureForm';
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Routes>
                     <Route path="/shopform" element={<ShopForm />} />
                     <Route path="/eventform" element={<EventForm />} />
+                    <Route path="/publicfigureform" element={<PublicFigureForm />} />
                 </Routes>
             </Router>
         </div>
