@@ -8,6 +8,7 @@ import EventIcon from '@mui/icons-material/Event';
 import BadgeIcon from '@mui/icons-material/Badge';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import PortraitIcon from '@mui/icons-material/Portrait';
+import HowToVoteIcon from '@mui/icons-material/HowToVote';
 
 const drawerWidth = 240;
 
@@ -38,7 +39,13 @@ const NavBar = () => {
             text: 'Public Figure Post',
             icon: <PostAddIcon />,
             route: '/publicfigurepostform',
-        }
+        },
+        {
+            text: 'Poll Form',
+            icon: <HowToVoteIcon />,
+            route: '/pollform',
+        },
+
     ];
 
     return (
