@@ -7,6 +7,7 @@ import EventForm from './Forms/EventForm';
 import PublicFigureForm from './Forms/PublicFigureForm';
 import PublicFigurePostForm from './Forms/PublicFigurePostForm';
 import PollForm from './Forms/PollForm';
+import ProductForm from './Forms/ProductForm';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/publicfigureform" element={<PublicFigureForm />} />
                     <Route path="/publicfigurepostform" element={<PublicFigurePostForm />} />
                     <Route path="/pollform" element={<PollForm />} />
+                    <Route path="/productform" element={<ProductForm />} />
                 </Routes>
             </Router>
         </div>
