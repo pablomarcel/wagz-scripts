@@ -9,6 +9,7 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import PortraitIcon from '@mui/icons-material/Portrait';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
+import SellIcon from '@mui/icons-material/Sell';
 
 const drawerWidth = 240;
 
@@ -24,6 +25,11 @@ const NavBar = () => {
             text: 'Shop Form',
             icon: <ShoppingIcon />,
             route: '/shopform',
+        },
+        {
+            text: 'Product Form',
+            icon: <SellIcon />,
+            route: '/productform',
         },
         {
             text: 'Event Form',
