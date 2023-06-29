@@ -20,13 +20,14 @@ exports.handler = async (event, context) => {
         const result = await session.run(`
             MATCH (owner:PetOwner {id: $petOwnerId})
             MATCH (pet:Pet {id: $petId})
-            CREATE (post:Post {id: randomUUID(), caption: $caption, fileUrl: $fileUrl})
+            CREATE (post:Post {id: randomUUID(), caption: $caption, fileUrl: $fileUrl, timestamp: datetime()}) // <-- Added timestamp here
             MERGE (owner)-[:POSTED]->(post)
             MERGE (post)-[:ABOUT]->(pet)
             RETURN post
         `, { petOwnerId, petId, caption, fileUrl });
 
         const post = result.records[0].get('post').properties;
+        post.timestamp = new Date(post.timestamp); // Convert timestamp string to Date object
 
         // Handle tags, if any
         if (tags) {
