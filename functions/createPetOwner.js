@@ -1,6 +1,7 @@
 require('dotenv').config();
 const neo4j = require('neo4j-driver');
 const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 
 // Replace with your Neo4j Aura connection credentials
 const driver = neo4j.driver(
@@ -14,7 +15,24 @@ exports.handler = async (event, context) => {
     }
 
     const body = JSON.parse(event.body);
-    let { name, fileUrl, bio, hashEmail } = body;
+    let { id, name, fileUrl, bio, email } = body;
+
+    // Log original email
+    //console.log(`Original Email: ${email}`);
+
+    // Convert email to lowercase
+    const lowerEmail = email.toLowerCase();
+
+    // Log lowercased email
+    //console.log(`Lowercased Email: ${lowerEmail}`);
+
+    // Create email hash
+    const hash = crypto.createHash('sha256');
+    hash.update(lowerEmail);
+    const hashEmail = hash.digest('hex');
+
+    // Log hashed email
+    //console.log(`Hashed Email: ${hashEmail}`);
 
     const session = driver.session();
     try {
@@ -24,16 +42,15 @@ exports.handler = async (event, context) => {
                 RETURN owner
             `;
             const params = {
-                id: uuidv4(),
+                id: id,
                 name: name,
                 hashEmail: hashEmail,
                 fileUrl: fileUrl,
-                bio: bio
+                bio: bio,
             };
             const response = await tx.run(query, params);
             return response.records[0].get('owner').properties;
         });
-
 
         return { statusCode: 201, body: JSON.stringify(result) };
     } catch (error) {
