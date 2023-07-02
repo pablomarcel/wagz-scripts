@@ -14,19 +14,26 @@ exports.handler = async (event, context) => {
     }
 
     const body = JSON.parse(event.body);
-    let { name, email, fileUrl, bio, hashEmail } = body; // get hashEmail from request body
+    let { name, fileUrl, bio, hashEmail } = body;
 
     const session = driver.session();
     try {
         const result = await session.writeTransaction(async (tx) => {
             const query = `
-                CREATE (owner:PetOwner {id: $id, name: $name, email: $email, hashEmail: $hashEmail, fileUrl: $fileUrl, bio: $bio})
+                CREATE (owner:PetOwner {id: $id, name: $name, hashEmail: $hashEmail, fileUrl: $fileUrl, bio: $bio})
                 RETURN owner
             `;
-            const params = { id: uuidv4(), name, email, hashEmail, fileUrl, bio };
+            const params = {
+                id: uuidv4(),
+                name: name,
+                hashEmail: hashEmail,
+                fileUrl: fileUrl,
+                bio: bio
+            };
             const response = await tx.run(query, params);
             return response.records[0].get('owner').properties;
         });
+
 
         return { statusCode: 201, body: JSON.stringify(result) };
     } catch (error) {
