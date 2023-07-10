@@ -13,6 +13,8 @@ exports.handler = async (event, context) => {
     }
 
     const body = JSON.parse(event.body);
+    console.log(`Received body: ${JSON.stringify(body)}`); // Added log
+
     const { communityId, ownerId, caption, fileUrl, tags } = body;
 
     const session = driver.session();
@@ -29,8 +31,10 @@ exports.handler = async (event, context) => {
                 RETURN post
             `;
             const params = { id: uuidv4(), communityId, ownerId, caption, fileUrl };
+            console.log(`Running transaction with params: ${JSON.stringify(params)}`); // Added log
             const response = await tx.run(query, params);
             const communityPost = response.records[0].get('post').properties;
+            console.log(`Created post: ${JSON.stringify(communityPost)}`); // Added log
 
             // Handle tags, if any
             if (tags) {
@@ -59,6 +63,7 @@ exports.handler = async (event, context) => {
             return communityPost;
         });
 
+        console.log(`Returning result: ${JSON.stringify(result)}`); // Added log
         return { statusCode: 200, body: JSON.stringify(result) };
     } catch (error) {
         console.error('Error creating community post:', error);
